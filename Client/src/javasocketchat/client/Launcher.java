@@ -1,7 +1,13 @@
 package javasocketchat.client;
 
+import java.util.Scanner;
+
 public class Launcher {
     public static void main(String[] args) {
-        System.out.println("Hello world / Client");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter your name to join chat room : ");
+        String name = scanner.nextLine();
+        new Client(name);
     }
 }

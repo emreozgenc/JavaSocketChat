@@ -43,6 +43,8 @@ public class Client {
                 if (clientData.equalsIgnoreCase("BYE"))
                     break;
                 bufferedWriter.write(nickName + " : " + clientData);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
             }
         } catch (IOException exception) {
             System.err.println(exception.getMessage());

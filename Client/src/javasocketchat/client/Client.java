@@ -35,20 +35,33 @@ public class Client {
     }
 
     private void work() {
-        try {
-            while (true) {
-                String receivedData = bufferedReader.readLine();
-                System.out.println(receivedData);
+
+        new Thread(() -> {
+            String data = null;
+            try {
+                while((data = bufferedReader.readLine()) != null) {
+                    System.out.println(data);
+                }
+            } catch (IOException exception) {
+                System.err.println(exception.getMessage());
+            }
+        }).start();
+
+        while (true) {
+            try {
                 String clientData = scanner.nextLine();
-                if (clientData.equalsIgnoreCase("BYE"))
+                if (clientData.equalsIgnoreCase("BYE")) {
+                    socket.close();
                     break;
+                }
                 bufferedWriter.write(nickName + " : " + clientData);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
+            } catch (IOException exception) {
+                System.err.println(exception.getMessage());
             }
-        } catch (IOException exception) {
-            System.err.println(exception.getMessage());
         }
+
     }
 
 }
